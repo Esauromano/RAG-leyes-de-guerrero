@@ -1,0 +1,11 @@
+requests
+beautifulsoup4
+PyPDF2
+streamlit
+llama_index
+# This file lists the required Python packages for the project.
+# You can install them using pip:
+# pip install -r requirements.txt
+# Make sure to run this command in the same environment where you will run the application.
+# If you are using a virtual environment, activate it before running the command.
+# If you encounter any issues, ensure that your Python version is compatible with these packages.       

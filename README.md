@@ -5,8 +5,14 @@ Este proyecto descarga, indexa y permite consultar leyes y reglamentos del estad
 ## Requisitos
 
 - Python 3.9+ (recomendado usar un entorno virtual)
-- [Ollama](https://ollama.com/) (para LLM local, opcional si usas OpenAI)
-- Paquetes Python (ver abajo)
+- [Ollama](https://ollama.com/) (para LLM local)
+- Paquetes Python:
+  - llama_index
+  - llama-index-ollama
+  - beautifulsoup4
+  - requests
+  - PyPDF2
+  - streamlit
 
 ## Instalación
 
@@ -33,6 +39,31 @@ Este proyecto descarga, indexa y permite consultar leyes y reglamentos del estad
      ollama serve
      ollama pull llama3:8b
      ```
+
+## Instalación automática (opción recomendada)
+
+Puedes instalar todo automáticamente ejecutando el script:
+
+```sh
+bash install.sh
+```
+
+Este script:
+- Verifica tu versión de Python
+- Crea y activa un entorno virtual
+- Instala todas las dependencias
+- Verifica que Ollama esté instalado y el modelo llama3:8b descargado
+
+¡Verás mensajes de progreso y sabrás exactamente qué pasos faltan!
+
+---
+
+Si prefieres la instalación manual, sigue los pasos detallados más arriba.
+
+## Notas sobre Ollama
+
+- El paquete `llama-index-ollama` permite usar modelos locales de Ollama como LLM y para embeddings en tu pipeline de RAG.
+- Asegúrate de tener Ollama corriendo (`ollama serve`) antes de ejecutar los scripts de indexado o consulta.
 
 ## Descarga de PDFs
 

@@ -30,14 +30,17 @@ CURRENT=1
 echo -e "${GREEN}🚀 Instalador de RAG Leyes de Guerrero${NC}"
 echo "-----------------------------------------"
 
-# Paso 1: Verificar Python
-step $CURRENT "Verificando Python 3.9+"
+# Paso 1: Verificar Python >= 3.9
+step $CURRENT "Verificando Python 3.9 o superior"
 if command -v python3 &>/dev/null; then
   PYV=$(python3 -c 'import sys; print(".".join(map(str, sys.version_info[:3])))')
-  if [[ "$PYV" < "3.9" ]]; then
-    fail "Python 3.9+ requerido. Encontrado: $PYV"
+  MAJOR=$(python3 -c 'import sys; print(sys.version_info[0])')
+  MINOR=$(python3 -c 'import sys; print(sys.version_info[1])')
+  if [[ "$MAJOR" -eq 3 && "$MINOR" -ge 9 ]]; then
+    success "Python $PYV encontrado"
+  else
+    fail "Se requiere Python 3.9 o superior. Encontrado: $PYV"
   fi
-  success "Python $PYV encontrado"
 else
   fail "Python 3.9+ no encontrado. Instálalo antes de continuar."
 fi

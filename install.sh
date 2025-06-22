@@ -24,7 +24,7 @@ fail() {
   exit 1
 }
 
-TOTAL=6
+TOTAL=7
 CURRENT=1
 
 echo -e "${GREEN}🚀 Instalador de RAG Leyes de Guerrero${NC}"
@@ -88,6 +88,17 @@ if ! ollama list | grep -q "llama3:8b"; then
 else
   success "Modelo llama3:8b ya está disponible"
 fi
+((CURRENT++))
+
+# Paso 7: Descargar modelo all-minilm si no existe
+step $CURRENT "Verificando modelo all-minilm en Ollama"
+if ! ollama list | grep -q "all-minilm"; then
+  echo -e "${YELLOW}Descargando modelo all-minilm...${NC}"
+  ollama pull all-minilm
+  success "Modelo all-minilm descargado"
+else
+  success "Modelo all-minilm ya está disponible"
+fi
 
 echo -e "${GREEN}\n🎉 Instalación completada con éxito.${NC}"
-echo -e "${BLUE}Ahora puedes ejecutar:${NC} ${YELLOW}python 1by1.py${NC} o ${YELLOW}python congresogro-gob-mx-crawler.py${NC}"
+echo -e "${BLUE}Ahora puedes ejecutar:${NC} ${YELLOW}python 1by1.py${NC} o ${YELLOW}python congresogro-gob-

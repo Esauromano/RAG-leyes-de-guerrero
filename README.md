@@ -34,11 +34,12 @@ Este proyecto descarga, indexa y permite consultar leyes y reglamentos del estad
    pip install -r requirements.txt
    ```
 
-4. **(Opcional) Instala Ollama y descarga el modelo:**
+4. **(Opcional) Instala Ollama y descarga los modelos:**
    - [Descarga Ollama](https://ollama.com/download) y ejecuta:
      ```sh
      ollama serve
      ollama pull llama3:8b
+     ollama pull all-minilm
      ```
 
 ## Instalación automática (opción recomendada)

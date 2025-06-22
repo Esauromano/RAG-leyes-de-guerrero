@@ -1,14 +1,15 @@
 #!/usr/bin/env python3  # Indica que el script debe ejecutarse con Python 3
 
 from llama_index.core import StorageContext, load_index_from_storage  # Importa funciones para cargar el índice persistido
-from llama_index.embeddings.ollama import OllamaEmbedding
-from llama_index.llms.ollama import Ollama
-from llama_index.core import Settings
+from llama_index.embeddings.ollama import OllamaEmbedding      # Importa el wrapper de embeddings de Ollama
+from llama_index.llms.ollama import Ollama                    # Importa el wrapper del LLM de Ollama
+from llama_index.core import Settings                         # Permite configurar los modelos globalmente
+
+# Configura el LLM y los embeddings para que usen Ollama en vez de OpenAI
+Settings.llm = Ollama(model="llama3:8b")                      # Usa el modelo LLM local de Ollama
+Settings.embed_model = OllamaEmbedding(model_name="all-minilm") # Usa el modelo de embeddings local de Ollama
 
 INDEX_DIR = "./storage"  # Carpeta donde se guarda el índice vectorial
-
-Settings.llm = Ollama(model="llama3:8b")
-Settings.embed_model = OllamaEmbedding(model_name="all-minilm")
 
 # Carga el índice existente desde disco usando el contexto de almacenamiento
 storage_context = StorageContext.from_defaults(persist_dir=INDEX_DIR)
@@ -27,4 +28,4 @@ if __name__ == "__main__":  # Solo ejecuta esto si el script es el principal
             print(f"\nRespuesta:\n{respuesta}\n")     # Muestra la respuesta
         except KeyboardInterrupt:  # Si el usuario presiona Ctrl+C
             print("\nSaliendo.")   # Muestra mensaje de salida
-            break
+            break                  # Sale del bucle

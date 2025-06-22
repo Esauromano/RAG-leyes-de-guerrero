@@ -9,6 +9,7 @@ Este proyecto descarga, indexa y permite consultar leyes y reglamentos del estad
 - Paquetes Python:
   - llama_index
   - llama-index-ollama
+  - llama-index-embeddings-ollama
   - beautifulsoup4
   - requests
   - PyPDF2

@@ -15,17 +15,20 @@ INDEX_DIR = "./storage"  # Carpeta donde se guarda el índice vectorial
 storage_context = StorageContext.from_defaults(persist_dir=INDEX_DIR)
 index = load_index_from_storage(storage_context)
 
-# Crea el motor de consulta (query engine) con los parámetros deseados
-query_engine = index.as_query_engine(similarity_top_k=4)
+# Activa el modo streaming
+query_engine = index.as_query_engine(similarity_top_k=4, streaming=True)
 
 if __name__ == "__main__":  # Solo ejecuta esto si el script es el principal
     print("\nRAG lista. Escribe tu pregunta (Ctrl+C para salir):")
     while True:  # Bucle infinito para el chat interactivo
         try:
             pregunta = input("Pregunta: ")  # Solicita una pregunta al usuario
-            print("⏳ Consultando...")      # Muestra mensaje de espera
-            respuesta = query_engine.query(pregunta)  # Consulta el índice con la pregunta
-            print(f"\nRespuesta:\n{respuesta}\n")     # Muestra la respuesta
+            print("⏳ Consultando...\n")      # Muestra mensaje de espera
+            # El método .query ahora devuelve un generador de tokens
+            response_stream = query_engine.query(pregunta)
+            for token in response_stream.response_gen:
+                print(token, end="", flush=True)  # Muestra cada token conforme llega
+            print("\n")
         except KeyboardInterrupt:  # Si el usuario presiona Ctrl+C
             print("\nSaliendo.")   # Muestra mensaje de salida
             break                  # Sale del bucle

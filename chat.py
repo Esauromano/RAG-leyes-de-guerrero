@@ -5,8 +5,8 @@ from llama_index.embeddings.ollama import OllamaEmbedding      # Importa el wrap
 from llama_index.llms.ollama import Ollama                    # Importa el wrapper del LLM de Ollama
 from llama_index.core import Settings                         # Permite configurar los modelos globalmente
 
-# Configura el LLM y los embeddings para que usen Ollama en vez de OpenAI
-Settings.llm = Ollama(model="llama3:8b")                      # Usa el modelo LLM local de Ollama
+# Configura el LLM y los embeddings de Ollama con un timeout extendido
+Settings.llm = Ollama(model="llama3:8b", request_timeout=300)  # 300 segundos de timeout
 Settings.embed_model = OllamaEmbedding(model_name="all-minilm") # Usa el modelo de embeddings local de Ollama
 
 INDEX_DIR = "./storage"  # Carpeta donde se guarda el índice vectorial

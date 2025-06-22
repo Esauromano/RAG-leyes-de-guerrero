@@ -86,7 +86,7 @@ Los archivos se guardarán en la carpeta `leyes_guerrero`.
 Para indexar los PDFs y construir el RAG ejecuta:
 
 ```sh
-python 1by1.py
+python build_index.py
 ```
 
 Este script:

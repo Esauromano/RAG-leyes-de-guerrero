@@ -1,8 +1,14 @@
 #!/usr/bin/env python3  # Indica que el script debe ejecutarse con Python 3
 
 from llama_index.core import StorageContext, load_index_from_storage  # Importa funciones para cargar el índice persistido
+from llama_index.embeddings.ollama import OllamaEmbedding
+from llama_index.llms.ollama import Ollama
+from llama_index.core import Settings
 
 INDEX_DIR = "./storage"  # Carpeta donde se guarda el índice vectorial
+
+Settings.llm = Ollama(model="llama3:8b")
+Settings.embed_model = OllamaEmbedding(model_name="all-minilm")
 
 # Carga el índice existente desde disco usando el contexto de almacenamiento
 storage_context = StorageContext.from_defaults(persist_dir=INDEX_DIR)
